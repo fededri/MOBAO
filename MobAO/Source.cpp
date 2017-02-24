@@ -54,7 +54,7 @@ int main( int argc, char* args[] )
 	}else {
 		textureWrapper = new TextureWrapper(renderer);
 		loadMedia();
-		textureWrapper->render(100,100,&spriteClips[3]);
+		textureWrapper->render(100,100,&spriteClips[16]);
 		SDL_RenderPresent(renderer);
 	}
 
@@ -69,11 +69,16 @@ int main( int argc, char* args[] )
 	while(SDL_PollEvent(&e)){
 		if(e.key.keysym.scancode == SDL_SCANCODE_Q) {
 			quit = true;
-		}else if(e.key.keysym.scancode == SDL_SCANCODE_W){
-			//move up
-			animatedBody.moveUp();
+		}else if(e.type == SDL_KEYDOWN || e.type == SDL_KEYUP){
+			//move up	
+			if (e.type != SDL_KEYUP) {
+				SDL_RenderClear(renderer);
+			}
+			animatedBody.handleEvent(e);		
+			SDL_RenderPresent(renderer);
 		}
 	}
+	
 	}
 
 
@@ -124,90 +129,90 @@ bool loadMedia(){
 
 		//second row
 		spriteClips[6].x = 0;
-		spriteClips[6].y = 25;
+		spriteClips[6].y = 45;
 		spriteClips[6].w = 25;
 		spriteClips[6].h = 45;
 
 		spriteClips[7].x = 25;
-		spriteClips[7].y = 25;
+		spriteClips[7].y = 45;
 		spriteClips[7].w = 25;
 		spriteClips[7].h = 45;
 
 		spriteClips[8].x = 50;
-		spriteClips[8].y = 25;
+		spriteClips[8].y = 45;
 		spriteClips[8].w = 25;
 		spriteClips[8].h = 45;
 
 		spriteClips[9].x = 75;
-		spriteClips[9].y = 25;
+		spriteClips[9].y = 45;
 		spriteClips[9].w = 25;
 		spriteClips[9].h = 45;
 
 		spriteClips[9].x = 100;
-		spriteClips[9].y = 25;
+		spriteClips[9].y = 45;
 		spriteClips[9].w = 25;
 		spriteClips[9].h = 45;
 
 		spriteClips[10].x = 125;
-		spriteClips[10].y = 25;
+		spriteClips[10].y = 45;
 		spriteClips[10].w = 25;
 		spriteClips[10].h = 45;
 
 		//third row, has five items
 		spriteClips[11].x = 0;
-		spriteClips[11].y = 50;
+		spriteClips[11].y = 90;
 		spriteClips[11].w = 25;
 		spriteClips[11].h = 45;
 
 		spriteClips[12].x = 25;
-		spriteClips[12].y = 50;
+		spriteClips[12].y = 90;
 		spriteClips[12].w = 25;
 		spriteClips[12].h = 45;
 
 		spriteClips[13].x = 50;
-		spriteClips[13].y = 50;
+		spriteClips[13].y = 90;
 		spriteClips[13].w = 25;
 		spriteClips[13].h = 45;
 
 
 		spriteClips[14].x = 75;
-		spriteClips[14].y = 50;
+		spriteClips[14].y = 90;
 		spriteClips[14].w = 25;
 		spriteClips[14].h = 45;
 
 
 		spriteClips[15].x = 100;
-		spriteClips[15].y = 50;
+		spriteClips[15].y = 90;
 		spriteClips[15].w = 25;
 		spriteClips[15].h = 45;
 
 
 		//fourth row
 		spriteClips[16].x = 0;
-		spriteClips[16].y = 75;
+		spriteClips[16].y = 135;
 		spriteClips[16].w = 25;
 		spriteClips[16].h = 45;
 
 		spriteClips[17].x = 25;
-		spriteClips[17].y = 75;
+		spriteClips[17].y = 135;
 		spriteClips[17].w = 25;
 		spriteClips[17].h = 45;
 
 
 		spriteClips[18].x = 50;
-		spriteClips[18].y = 75;
+		spriteClips[18].y = 135;
 		spriteClips[18].w = 25;
 		spriteClips[18].h = 45;
 
 
 		spriteClips[19].x = 75;
-		spriteClips[19].y = 75;
+		spriteClips[19].y = 135;
 		spriteClips[19].w = 25;
 		spriteClips[19].h = 45;
 
 
 		spriteClips[20].x = 100;
-		spriteClips[20].y = 75;
+		spriteClips[20].y = 135;
 		spriteClips[20].w = 25;
 		spriteClips[20].h = 45;
 
