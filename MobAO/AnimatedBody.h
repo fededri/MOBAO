@@ -9,7 +9,7 @@ public:
 	AnimatedBody();
 	~AnimatedBody(void);
 
-	static const int VELOCITY = 3;
+	static const int VELOCITY = 5;
 	static const int WIDTH = 25;
 	static const int HEIGHT = 45;
 
@@ -23,6 +23,8 @@ public:
 	vector<SDL_Rect> clips;
 
 	void setSpriteClips(SDL_Rect a[],int arrayLenght);
+
+	void renderOnCurrentPosition();
 
 private:
 	int posX, posY;

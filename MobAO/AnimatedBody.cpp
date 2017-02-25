@@ -1,6 +1,6 @@
 #include "AnimatedBody.h"
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1024;
+const int SCREEN_HEIGHT = 768;
 
 AnimatedBody::AnimatedBody(void)
 {
@@ -20,6 +20,11 @@ void AnimatedBody::setSpriteClips(SDL_Rect a[], int arrayLenght){
 	for(int i =0; i<arrayLenght;i++){
 		clips.push_back(a[i]);
 	}
+}
+
+
+void AnimatedBody::renderOnCurrentPosition() {
+	getTexture()->render(posX, posY, &clips[getCurrentFrame()]);
 }
 
 
@@ -66,6 +71,7 @@ void AnimatedBody::handleEvent(SDL_Event& event)  {
 		default:
 			break;
 		}
+		renderOnCurrentPosition();
 	}
 }
 
@@ -145,6 +151,7 @@ void AnimatedBody::handleEvent(SDL_Event& event)  {
 		}
 		else {
 			frame++;
+			if (frame >= 20) frame = 16; //avoid runtime exception for invalid index accessing clips
 		}
 		setCurrentFrame(frame);
 		SDL_Rect nextClip = clips[frame];

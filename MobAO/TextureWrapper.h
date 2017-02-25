@@ -11,6 +11,7 @@
 class TextureWrapper
 {
 public:
+
 	TextureWrapper(SDL_Renderer* renderer);
 	~TextureWrapper(void);
 
@@ -26,6 +27,10 @@ public:
 	int getHeight();	
 	void clearRender();
 	SDL_Renderer* getRenderer();
+	void setAsRendertarget();
+	SDL_Texture* getTexture();
+
+	bool createBlank(int width, int height, SDL_TextureAccess = SDL_TEXTUREACCESS_STREAMING);
 
 private:
 	//hardware texture

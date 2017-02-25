@@ -5,8 +5,8 @@
 
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1024;
+const int SCREEN_HEIGHT = 768;
 
 
 bool initSDL();
@@ -18,11 +18,13 @@ SDL_Renderer* renderer = NULL;
 bool quit = false;
 SDL_Rect spriteClips[22];
 TextureWrapper* textureWrapper;
+SDL_Texture* mapTexture;
+TextureWrapper* glassTextureWrapper;
 
 
 bool initSDL(){
 	bool success = true;
-
+	
 		if(SDL_Init(SDL_INIT_VIDEO) < 0){
 		printf("SDL no se pudo incializar: SDL_ERROR %s\n", SDL_GetError());		
 		success = false;
@@ -33,13 +35,17 @@ bool initSDL(){
 		
 			window = SDL_CreateWindow("SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT,
 				SDL_WINDOW_SHOWN);
+			SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 			if (window == NULL){
 				printf("No se pudo crear la ventana %s\n",SDL_GetError);
 				success = false;
 			}else {				
 				renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-				SDL_SetRenderDrawColor(renderer,0x00,0x00,0x00,0x00);			
+				SDL_SetRenderTarget(renderer, mapTexture);
+				SDL_SetRenderDrawColor(renderer,0x00,0x00,0x00,0x00);	
 				
+				
+
 
 			}
 		}
@@ -64,6 +70,17 @@ int main( int argc, char* args[] )
 	animatedBody.setTexture(textureWrapper);
 	animatedBody.setSpriteClips(spriteClips,20);
 
+	glassTextureWrapper = new TextureWrapper(renderer);
+
+	glassTextureWrapper->createBlank(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_TEXTUREACCESS_STREAMING);
+	
+	TextureWrapper* glass;
+	glass =  new TextureWrapper(renderer);
+	glass->loadFromFile("12037.bmp");
+	SDL_RenderCopy(renderer, glass->getTexture(), NULL, NULL);
+	animatedBody.renderOnCurrentPosition();
+
+	SDL_RenderPresent(renderer);
 	SDL_Event e;
 	while(!quit){
 	while(SDL_PollEvent(&e)){
@@ -71,10 +88,19 @@ int main( int argc, char* args[] )
 			quit = true;
 		}else if(e.type == SDL_KEYDOWN || e.type == SDL_KEYUP){
 			//move up	
-			if (e.type != SDL_KEYUP) {
-				SDL_RenderClear(renderer);
-			}
+		//	if (e.type != SDL_KEYUP) {
+				//SDL_RenderClear(renderer);
+			//}
+			
+			SDL_RenderCopy(renderer, glass->getTexture(), NULL, NULL);
+			//animatedBody.renderOnCurrentPosition();
 			animatedBody.handleEvent(e);		
+
+			SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0x00, 0xFF);
+
+			for (int i = 0; i < SCREEN_HEIGHT; i++) {
+				SDL_RenderDrawPoint(renderer, SCREEN_WIDTH / 2, i);
+			}
 			SDL_RenderPresent(renderer);
 		}
 	}

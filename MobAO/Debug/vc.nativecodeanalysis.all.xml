@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\federico\documents\mobao\mobao\</FILEPATH>
+      <FILENAME>source.cpp</FILENAME>
+      <LINE>38</LINE>
+      <COLUMN>10</COLUMN>
+    </SFA>
+    <DEFECTCODE>6067</DEFECTCODE>
+    <DESCRIPTION>El elemento _Param_(2) de la llamada a 'printf' debe ser la dirección de una cadena. Tipo real: 'const char *(__cdecl *)(void)'.</DESCRIPTION>
+    <FUNCTION>initSDL</FUNCTION>
+    <DECORATED>?initSDL@@YA_NXZ</DECORATED>
+    <FUNCLINE>24</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\federico\documents\mobao\mobao\</FILEPATH>
+      <FILENAME>texturewrapper.cpp</FILENAME>
+      <LINE>38</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>6271</DEFECTCODE>
+    <DESCRIPTION>Argumento adicional pasado en 'printf':  la cadena de formato no usa _Param_(3).</DESCRIPTION>
+    <FUNCTION>TextureWrapper::loadFromFile</FUNCTION>
+    <DECORATED>?loadFromFile@TextureWrapper@@QAE_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
+    <FUNCLINE>32</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT></DEFECTS>

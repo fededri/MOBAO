@@ -10,6 +10,29 @@ TextureWrapper::TextureWrapper(SDL_Renderer* r){
 	height = 0;
 }
 
+bool TextureWrapper::createBlank(int w, int h, SDL_TextureAccess  access) {
+	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, access, w, h);
+	if (texture == NULL) {
+		printf("No se pudo crear textura en blanco");
+	}
+	else {
+		width = w;
+		height = h;
+	}
+	
+	return texture != NULL;
+
+}
+
+void TextureWrapper::setAsRendertarget() {
+	SDL_SetRenderTarget(renderer, texture);
+}
+
+
+SDL_Texture* TextureWrapper::getTexture() {
+	return texture;
+}
+
 void TextureWrapper::render(int x, int y, SDL_Rect* clip){
 
 	//sets the rect space to draw texture
